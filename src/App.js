@@ -5,18 +5,11 @@ import SideBar from "./components/SideBar";
 import Feed from "./components/Feed";
 import Widgets from "./components/Widgets";
 import Login from "./components/Login";
+import { useStateValue } from "./StateProvider";
 
-import configureStore from "./store/configureStore";
-import * as actions from "./store/users";
-
-const store = configureStore();
-
-console.log(store);
 function App() {
-  const state = store.getState();
-  console.log(state);
+  const [{ user }, dispatch] = useStateValue();
 
-  const user = state;
   return (
     <div className="App">
       {!user ? (
@@ -28,7 +21,6 @@ function App() {
           <div className="app__body">
             <SideBar />
             <Feed />
-            <Widgets />
           </div>
         </>
       )}

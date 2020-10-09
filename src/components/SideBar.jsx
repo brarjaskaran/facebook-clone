@@ -9,10 +9,13 @@ import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import EmojiFlagsOutlinedIcon from "@material-ui/icons/EmojiFlagsOutlined";
 import { LocalHospital, StorefrontOutlined } from "@material-ui/icons";
+import { useStateValue } from "../StateProvider";
 function SideBar() {
+  const [{ user }, dispatch] = useStateValue();
+
   return (
     <div className="sideBar">
-      <SidebarRow title="Jaskran Brar" src="" />
+      <SidebarRow title={user.displayName} src={user.photoURL} />
       <SidebarRow title="Covid-19 Information Center" Icon={LocalHospital} />
       <SidebarRow title="Pages" Icon={EmojiFlagsOutlinedIcon} />
       <SidebarRow title="Friends" Icon={PeopleIcon} />

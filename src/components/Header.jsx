@@ -11,16 +11,10 @@ import AddOutlinedIcon from "@material-ui/icons/AddOutlined";
 import ForumRoundedIcon from "@material-ui/icons/ForumRounded";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
-import configureStore from "../store/configureStore";
-import * as actions from "../store/users";
-
-const store = configureStore();
+import { useStateValue } from "../StateProvider";
 
 function Header() {
-  const state = store.getState();
-  console.log(state);
-
+  const [{ user }, dispatch] = useStateValue();
   return (
     <div className="header">
       <div className="header__left">
@@ -55,8 +49,8 @@ function Header() {
       </div>
       <div className="header__right">
         <div className="header__info">
-          <Avatar />
-          <h4>Jaskaran Brar</h4>
+          <Avatar src={user.photoURL} />
+          <h4>{user.displayName}</h4>
         </div>
         <IconButton>
           <AddOutlinedIcon />
