@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Header from "./components/Header";
+import SideBar from "./components/SideBar";
+import Feed from "./components/Feed";
+import Widgets from "./components/Widgets";
+import Login from "./components/Login";
 
+import configureStore from "./store/configureStore";
+import * as actions from "./store/users";
+
+const store = configureStore();
+
+console.log(store);
 function App() {
+  const state = store.getState();
+  console.log(state);
+
+  const user = state;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {!user ? (
+        <Login />
+      ) : (
+        <>
+          <Header />
+
+          <div className="app__body">
+            <SideBar />
+            <Feed />
+            <Widgets />
+          </div>
+        </>
+      )}
     </div>
   );
 }
